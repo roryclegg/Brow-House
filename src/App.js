@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import "./App.css";
 
+// First commit
+
 function App() {
   const [page, setPage] = useState(() => {
     const hash = window.location.hash.toLowerCase();
