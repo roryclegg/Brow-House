@@ -1,0 +1,11 @@
+200~node_modules
+node_modules/
+build/
+dist/
+.env
+.env.*
+.vscode/
+.idea/
+.DS_Store
+coverage/
+npm-debug.log*
