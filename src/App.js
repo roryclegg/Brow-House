@@ -45,7 +45,13 @@ function App() {
 
     const start = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
     const getTargetScroll = () => {
-      const directTarget = hash === "#" ? document.querySelector(".hero") : document.querySelector(hash);
+      const directTarget =
+        hash === "#"
+          ? document.querySelector(".hero")
+          : hash === "#contact"
+          ? document.querySelector(".contact-page") || document.querySelector(hash)
+          : document.querySelector(hash);
+
       if (directTarget) {
         return Math.max(0, directTarget.offsetTop - offset);
       }
@@ -94,6 +100,42 @@ function App() {
   const isGallery = page === "gallery";
   const isContact = page === "contact";
 
+  useEffect(() => {
+    const seo = {
+      home: {
+        title: "The Brow House | HD Brows, Eyebrow & LVL Lashes in Cheadle Hulme, Bramhall & Stockport",
+        description:
+          "The Brow House offers HD Brows, eyebrow shaping, LVL lashes, brow lamination, hybrid brows, threading and tint services in Cheadle Hulme, Bramhall, Cheadle, Woodford, Hazel Grove, Gatley and Wilmslow."
+      },
+      gallery: {
+        title: "Brow & Lash Gallery | HD Brows, LVL Lashes & Brow Treatments in Stockport",
+        description:
+          "View recent HD Brows, eyebrow shaping, LVL lashes, brow lamination and hybrid brow results from The Brow House in Cheadle Hulme, Bramhall and Stockport."
+      },
+      about: {
+        title: "About The Brow House | HD Brows, Eyebrow & LVL Lashes in Stockport",
+        description:
+          "Learn about The Brow House, a boutique brow and lash studio in Cheadle Hulme, Bramhall, Stockport and nearby areas specialising in HD Brows, eyebrow shaping and LVL lashes."
+      },
+      contact: {
+        title: "Contact The Brow House | Brow Studio in Cheadle Hulme, Bramhall & Stockport",
+        description:
+          "Contact The Brow House for appointments, directions and brow treatments including HD Brows, LVL lashes, tint, threading and brow lamination in Cheadle Hulme, Bramhall and Stockport."
+      }
+    };
+
+    const pageSeo = seo[page] || seo.home;
+    document.title = pageSeo.title;
+
+    let descriptionMeta = document.querySelector('meta[name="description"]');
+    if (!descriptionMeta) {
+      descriptionMeta = document.createElement("meta");
+      descriptionMeta.setAttribute("name", "description");
+      document.head.appendChild(descriptionMeta);
+    }
+    descriptionMeta.setAttribute("content", pageSeo.description);
+  }, [page]);
+
   return (
     <div className="app">
       <main className={`page ${page === "gallery" ? "page--gallery" : ""}`}>
@@ -102,7 +144,6 @@ function App() {
             <div className="hero__logo">
               <img src="/logo.jpg" alt="The Brow House logo" />
             </div>
-            <h1>Beautiful brows and eye lashes, perfectly shaped for you.</h1>
             <p>
               The Brow House is your local boutique brow studio in Cheadle Hulme / Bramhall.  We specialise in HD Brows & LVL Lashes.
             </p>
@@ -110,8 +151,11 @@ function App() {
               <a className="btn btn-secondary" href="#gallery" onClick={handleGalleryClick}>
                 View gallery
               </a>
+              <a className="btn btn-secondary" href="#services" onClick={handleServicesClick}>
+                Services Price List
+              </a>
               <a className="btn btn-primary" href="tel:+441234567890">
-                Book a consultation
+                Book an appointment
               </a>
               <a className="btn btn-secondary" href="https://wa.me/441234567890?text=Hi%20BrowHouse%2C%20I%27d%20like%20to%20book%20an%20appointment" target="_blank" rel="noreferrer">
                 Message on WhatsApp
@@ -172,7 +216,7 @@ function App() {
                 As a busy working mother, Vina often struggled with regular salon opening hours and consequently The Brow House offers very flexible hours. The Brow House is open until 10pm on weekdays and 6pm on Saturday with private off road parking.
               </p>
               <p>
-                To make an appointment please email <a href="mailto:vinaclegg@hotmail.co.uk">vinaclegg@hotmail.co.uk</a>, or call or text <a href="tel:07739395899">07739 395899</a>. HD Brows for £25 and LVL Lashes for £35 or both HD Brows and LVL Lashes together for the reduced price of £55.
+                To make an appointment please email <a href="mailto:vinaclegg@hotmail.co.uk">vinaclegg@hotmail.co.uk</a>, or call or text <a href="tel:07739395899">07739 395899</a>. HD Brows for £30.50 and LVL Lashes for £46 or both HD Brows and LVL Lashes together for the reduced price of £68.
               </p>
               <p>
                 Please visit our <a href="#contact" onClick={handleContactClick}>Find / Contact Us</a> page for our address and a map.
@@ -335,7 +379,7 @@ function App() {
               </ul>
               <h3>The Brow House – HD Brows Specialists</h3>
               <p>
-                Only qualified <a href="#about" onClick={handleAboutClick}>HD Brows stylists</a> can carry out the HD Brows treatment, and <a href="#" onClick={handleHomeClick}>The Brow House</a> now offers this exclusive treatment. HD Brows for £25 or book HD Brows and LVL Lashes together for the reduced price of £55.
+                Only qualified <a href="#about" onClick={handleAboutClick}>HD Brows stylists</a> can carry out the HD Brows treatment, and <a href="#" onClick={handleHomeClick}>The Brow House</a> now offers this exclusive treatment. HD Brows for £30.50 or book HD Brows and LVL Lashes together for the reduced price of £68.
               </p>
               <p>
                 Please note that a patch test must be carried out 48 hours prior to treatment, which we can post or deliver to your door if you are local to South Manchester, Stockport or North Cheshire as The Brow House is located on the border of Cheadle Hulme and Bramhall.
@@ -380,7 +424,7 @@ function App() {
                 <strong>Instagram:</strong> <a href="https://www.instagram.com/thebrowhouseuk" target="_blank" rel="noreferrer">@thebrowhouseuk</a>
               </p>
               <p>
-                The Brow House is easy to find as it is a 1 minute drive from A34, located on the border of Cheadle Hulme and Bramhall, which is situated on the border of Manchester and Cheshire.
+                The Brow House is easy to find as it is a 2 minute drive from A34, located on the border of Cheadle Hulme and Bramhall, which is situated on the border of Manchester and Cheshire.
               </p>
               <p>
                 We understand the needs of busy women and offer very flexible hours, to accommodate those who cannot make regular salon hours. We are open until 10pm on weekdays and 6pm on Saturday, with private off road parking.
@@ -439,10 +483,7 @@ function App() {
 
             <section id="services" className="section">
           <div className="section__headline">
-            <h2>Signature brow services</h2>
-            <p>
-              Designed for busy clients who want a polished, natural finish. Each treatment includes personalised shaping and expert care.
-            </p>
+            <h2>Brow House Services</h2>
           </div>
           <div className="grid services-grid">
             <article className="service-card">
@@ -523,9 +564,6 @@ function App() {
         <section id="contact" className="section">
           <div className="section__headline">
             <h2>Contact or Find Us</h2>
-            <p>
-              Get in touch with The Brow House for HD Brows, LVL Lashes, appointments and directions.
-            </p>
           </div>
           <div className="contact-details">
             <div className="contact-line contact-address">
@@ -557,7 +595,6 @@ function App() {
         </section>
 
         <footer className="footer">
-          <p>Modern brow styling with a relaxed UK studio feel.</p>
           <p>
             <a href="https://www.browhouse.uk">www.browhouse.uk</a>
           </p>

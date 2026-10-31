@@ -169,9 +169,9 @@ a {
 }
 
 .btn-primary {
-  background: #8d5a4c;
-  color: #fff;
-  box-shadow: 0 16px 35px rgba(141, 90, 76, 0.16);
+  background: rgba(141, 90, 76, 0.08);
+  color: #8d5a4c;
+  box-shadow: none;
 }
 
 .btn-secondary {
