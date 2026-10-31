@@ -66,6 +66,58 @@ function App() {
     requestAnimationFrame(animateScroll);
   };
 
+  const handleContactClick = (event) => {
+    event.preventDefault();
+
+    const hero = document.querySelector(".hero");
+    const targetScroll = hero ? hero.offsetHeight + 16 : 0;
+    const start = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+    const distance = targetScroll - start;
+    const duration = 1400;
+    const startTime = performance.now();
+
+    const animateScroll = (now) => {
+      const elapsed = now - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      window.scrollTo(0, start + distance * eased);
+
+      if (progress < 1) {
+        requestAnimationFrame(animateScroll);
+      }
+    };
+
+    setPage("contact");
+    window.history.replaceState(null, "", "#contact");
+    requestAnimationFrame(animateScroll);
+  };
+
+  const handleAboutClick = (event) => {
+    event.preventDefault();
+
+    const hero = document.querySelector(".hero");
+    const targetScroll = hero ? hero.offsetHeight + 16 : 0;
+    const start = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+    const distance = targetScroll - start;
+    const duration = 1400;
+    const startTime = performance.now();
+
+    const animateScroll = (now) => {
+      const elapsed = now - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      window.scrollTo(0, start + distance * eased);
+
+      if (progress < 1) {
+        requestAnimationFrame(animateScroll);
+      }
+    };
+
+    setPage("about");
+    window.history.replaceState(null, "", "#about");
+    requestAnimationFrame(animateScroll);
+  };
+
   const isAbout = page === "about";
   const isLVL = page === "lvl";
   const isHD = page === "hd";
@@ -94,17 +146,17 @@ function App() {
               <a className="btn btn-secondary" href="https://wa.me/441234567890?text=Hi%20BrowHouse%2C%20I%27d%20like%20to%20book%20an%20appointment" target="_blank" rel="noreferrer">
                 Message on WhatsApp
               </a>
-              <a className="btn btn-secondary" href="#contact">
+              <a className="btn btn-secondary" href="#contact" onClick={handleContactClick}>
                 Contact / Find Us
               </a>
-              <a className="btn btn-secondary" href="#about">
+              <a className="btn btn-secondary" href="#about" onClick={handleAboutClick}>
                 About us
               </a>
             </div>
           </div>
         </section>
 
-        {isGallery ? (
+        {isGallery && (
           <section id="gallery" className="section gallery-page">
             <div className="section__headline">
               <h2>Gallery</h2>
@@ -133,9 +185,9 @@ function App() {
               </a>
             </div>
           </section>
-        ) : null}
+        )}
 
-        {isAbout ? (
+        {isAbout && (
           <section className="section about-page">
             <div className="section__headline">
               <h2>About Us</h2>
@@ -167,7 +219,9 @@ function App() {
               </a>
             </div>
           </section>
-        ) : isLVL ? (
+        )}
+
+        {isLVL && (
           <section className="section lvl-page">
             <div className="section__headline">
               <h2>What are LVL Lashes?</h2>
@@ -237,7 +291,9 @@ function App() {
               </a>
             </div>
           </section>
-        ) : isHD ? (
+        )}
+
+        {isHD && (
           <section className="section hd-page">
             <div className="section__headline">
               <h2>What are HD Brows?</h2>
@@ -329,36 +385,9 @@ function App() {
               </a>
             </div>
           </section>
-        ) : isGallery ? (
-          <section className="section gallery-page">
-            <div className="section__headline">
-              <h2>Gallery</h2>
-              <p>Browse the latest brow and lash work from The Brow House.</p>
-            </div>
-            <div className="grid gallery">
-              <figure className="gallery-item" aria-label="Brow gallery image one">
-                <div className="gallery-item__image">
-                  <img src="/gallery-custom-1.jfif" alt="Brow gallery image 1" />
-                </div>
-                <figcaption>Gallery image 1</figcaption>
-              </figure>
-              <figure className="gallery-item" aria-label="Brow gallery image two">
-                <div className="gallery-item__image">
-                  <img src="/gallery-custom-2.jfif" alt="Brow gallery image 2" />
-                </div>
-                <figcaption>Gallery image 2</figcaption>
-              </figure>
-            </div>
-            <div className="about-actions">
-              <a className="btn btn-secondary" href="#about">
-                About us
-              </a>
-              <a className="btn btn-secondary" href="#">
-                Back to home
-              </a>
-            </div>
-          </section>
-        ) : isContact ? (
+        )}
+
+        {isContact && (
           <section className="section contact-page">
             <div className="section__headline">
               <h2>Contact or Find Us</h2>
@@ -413,8 +442,9 @@ function App() {
               </p>
             </div>
           </section>
-        ) : (
-          <>
+        )}
+
+        <>
             <section className="section">
               <div className="section__headline">
                 <h2>Explore</h2>
@@ -597,7 +627,6 @@ function App() {
           </p>
         </footer>
           </>
-        )}
       </main>
     </div>
   );
