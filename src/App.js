@@ -40,83 +40,53 @@ function App() {
     return () => window.removeEventListener("hashchange", handleHashChange);
   }, []);
 
-  const handleGalleryClick = (event) => {
+  const handleSectionClick = (targetPage, hash, offset = 0) => (event) => {
     event.preventDefault();
 
-    const hero = document.querySelector(".hero");
-    const targetScroll = hero ? hero.offsetHeight + 16 : 0;
     const start = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
-    const distance = targetScroll - start;
-    const duration = 1400;
-    const startTime = performance.now();
-
-    const animateScroll = (now) => {
-      const elapsed = now - startTime;
-      const progress = Math.min(elapsed / duration, 1);
-      const eased = 1 - Math.pow(1 - progress, 3);
-      window.scrollTo(0, start + distance * eased);
-
-      if (progress < 1) {
-        requestAnimationFrame(animateScroll);
+    const getTargetScroll = () => {
+      const directTarget = hash === "#" ? document.querySelector(".hero") : document.querySelector(hash);
+      if (directTarget) {
+        return Math.max(0, directTarget.offsetTop - offset);
       }
+
+      const fallbackTarget = document.querySelector(
+        ".gallery-page, .about-page, .lvl-page, .hd-page, .contact-page"
+      );
+
+      return fallbackTarget ? Math.max(0, fallbackTarget.offsetTop - offset) : 0;
     };
 
-    setPage("gallery");
-    window.history.replaceState(null, "", "#gallery");
-    requestAnimationFrame(animateScroll);
+    setPage(targetPage);
+    window.history.replaceState(null, "", hash);
+
+    requestAnimationFrame(() => {
+      const targetScroll = getTargetScroll();
+      const distance = targetScroll - start;
+      const duration = 1400;
+      const startTime = performance.now();
+
+      const animateScroll = (now) => {
+        const elapsed = now - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        window.scrollTo(0, start + distance * eased);
+
+        if (progress < 1) {
+          requestAnimationFrame(animateScroll);
+        }
+      };
+
+      requestAnimationFrame(animateScroll);
+    });
   };
 
-  const handleContactClick = (event) => {
-    event.preventDefault();
-
-    const hero = document.querySelector(".hero");
-    const targetScroll = hero ? hero.offsetHeight + 16 : 0;
-    const start = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
-    const distance = targetScroll - start;
-    const duration = 1400;
-    const startTime = performance.now();
-
-    const animateScroll = (now) => {
-      const elapsed = now - startTime;
-      const progress = Math.min(elapsed / duration, 1);
-      const eased = 1 - Math.pow(1 - progress, 3);
-      window.scrollTo(0, start + distance * eased);
-
-      if (progress < 1) {
-        requestAnimationFrame(animateScroll);
-      }
-    };
-
-    setPage("contact");
-    window.history.replaceState(null, "", "#contact");
-    requestAnimationFrame(animateScroll);
-  };
-
-  const handleAboutClick = (event) => {
-    event.preventDefault();
-
-    const hero = document.querySelector(".hero");
-    const targetScroll = hero ? hero.offsetHeight + 16 : 0;
-    const start = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
-    const distance = targetScroll - start;
-    const duration = 1400;
-    const startTime = performance.now();
-
-    const animateScroll = (now) => {
-      const elapsed = now - startTime;
-      const progress = Math.min(elapsed / duration, 1);
-      const eased = 1 - Math.pow(1 - progress, 3);
-      window.scrollTo(0, start + distance * eased);
-
-      if (progress < 1) {
-        requestAnimationFrame(animateScroll);
-      }
-    };
-
-    setPage("about");
-    window.history.replaceState(null, "", "#about");
-    requestAnimationFrame(animateScroll);
-  };
+  const handleGalleryClick = handleSectionClick("gallery", "#gallery");
+  const handleGalleryFigcaptionClick = handleSectionClick("gallery", "#gallery", 54);
+  const handleContactClick = handleSectionClick("contact", "#contact");
+  const handleAboutClick = handleSectionClick("about", "#about");
+  const handleServicesClick = handleSectionClick("home", "#services");
+  const handleHomeClick = handleSectionClick("home", "#");
 
   const isAbout = page === "about";
   const isLVL = page === "lvl";
@@ -167,20 +137,18 @@ function App() {
                 <div className="gallery-item__image">
                   <img src="/gallery-custom-1.jfif" alt="Brow gallery image 1" />
                 </div>
-                <figcaption>Gallery image 1</figcaption>
               </figure>
               <figure className="gallery-item" aria-label="Brow gallery image two">
                 <div className="gallery-item__image">
                   <img src="/gallery-custom-2.jfif" alt="Brow gallery image 2" />
                 </div>
-                <figcaption>Gallery image 2</figcaption>
               </figure>
             </div>
             <div className="about-actions">
-              <a className="btn btn-secondary" href="#about">
+              <a className="btn btn-secondary" href="#about" onClick={handleAboutClick}>
                 About us
               </a>
-              <a className="btn btn-secondary" href="#">
+              <a className="btn btn-secondary" href="#" onClick={handleHomeClick}>
                 Back to home
               </a>
             </div>
@@ -207,14 +175,14 @@ function App() {
                 To make an appointment please email <a href="mailto:vinaclegg@hotmail.co.uk">vinaclegg@hotmail.co.uk</a>, or call or text <a href="tel:07739395899">07739 395899</a>. HD Brows for £25 and LVL Lashes for £35 or both HD Brows and LVL Lashes together for the reduced price of £55.
               </p>
               <p>
-                Please visit our <a href="#contact">Find / Contact Us</a> page for our address and a map.
+                Please visit our <a href="#contact" onClick={handleContactClick}>Find / Contact Us</a> page for our address and a map.
               </p>
             </div>
             <div className="about-actions">
-              <a className="btn btn-secondary" href="#services">
+              <a className="btn btn-secondary" href="#services" onClick={handleServicesClick}>
                 View services
               </a>
-              <a className="btn btn-secondary" href="#">
+              <a className="btn btn-secondary" href="#" onClick={handleHomeClick}>
                 Back to home
               </a>
             </div>
@@ -264,7 +232,7 @@ function App() {
                 The Brow House is located on the border of Cheadle Hulme and Bramhall and most of our customers come from South Manchester, Stockport, Wilmslow, Poynton, Macclesfield and North and East Cheshire.
               </p>
               <p>
-                Please view our <a href="#contact">Contact / Find Us</a> page for address details and a map.
+                Please view our <a href="#contact" onClick={handleContactClick}>Contact / Find Us</a> page for address details and a map.
               </p>
               <img className="lvl-image" src="http://www.browhouse.uk/images/LVL%20Lashes%20before%20and%20after.jpg" alt="LVL Lashes before and after" />
               <p>
@@ -283,10 +251,10 @@ function App() {
               </div>
             </div>
             <div className="about-actions">
-              <a className="btn btn-secondary" href="#contact">
+              <a className="btn btn-secondary" href="#contact" onClick={handleContactClick}>
                 Contact us
               </a>
-              <a className="btn btn-secondary" href="#">
+              <a className="btn btn-secondary" href="#" onClick={handleHomeClick}>
                 Back to home
               </a>
             </div>
@@ -367,20 +335,20 @@ function App() {
               </ul>
               <h3>The Brow House – HD Brows Specialists</h3>
               <p>
-                Only qualified <a href="#about">HD Brows stylists</a> can carry out the HD Brows treatment, and <a href="#">The Brow House</a> now offers this exclusive treatment. HD Brows for £25 or book HD Brows and LVL Lashes together for the reduced price of £55.
+                Only qualified <a href="#about" onClick={handleAboutClick}>HD Brows stylists</a> can carry out the HD Brows treatment, and <a href="#" onClick={handleHomeClick}>The Brow House</a> now offers this exclusive treatment. HD Brows for £25 or book HD Brows and LVL Lashes together for the reduced price of £55.
               </p>
               <p>
                 Please note that a patch test must be carried out 48 hours prior to treatment, which we can post or deliver to your door if you are local to South Manchester, Stockport or North Cheshire as The Brow House is located on the border of Cheadle Hulme and Bramhall.
               </p>
               <p>
-                Please view our <a href="#contact">Contact / Find Us</a> page for address details and a map.
+                Please view our <a href="#contact" onClick={handleContactClick}>Contact / Find Us</a> page for address details and a map.
               </p>
             </div>
             <div className="about-actions">
-              <a className="btn btn-secondary" href="#contact">
+              <a className="btn btn-secondary" href="#contact" onClick={handleContactClick}>
                 Contact us
               </a>
-              <a className="btn btn-secondary" href="#">
+              <a className="btn btn-secondary" href="#" onClick={handleHomeClick}>
                 Back to home
               </a>
             </div>
@@ -422,7 +390,7 @@ function App() {
                 <a className="btn btn-secondary" href="mailto:vinaclegg@hotmail.co.uk">
                   Email us
                 </a>
-                <a className="btn btn-secondary" href="#">
+                <a className="btn btn-secondary" href="#" onClick={handleHomeClick}>
                   Back to home
                 </a>
               </div>
@@ -451,7 +419,7 @@ function App() {
               </div>
               <div className="grid gallery">
                 <figure className="gallery-item" aria-label="Full gallery">
-                  <a href="#gallery">
+                  <a href="#gallery" onClick={handleGalleryFigcaptionClick}>
                     <div className="gallery-item__image">
                       <img src="/gallery-custom-1.jfif" alt="Gallery preview" />
                     </div>
@@ -459,7 +427,7 @@ function App() {
                   </a>
                 </figure>
                 <figure className="gallery-item" aria-label="Brow lamination result">
-                  <a href="#about">
+                  <a href="#about" onClick={handleSectionClick("about", "#about", 54)}>
                     <div className="gallery-item__image">
                       <img src="/HD Brows Offical Stylist Vina3.jpg" alt="Brow stylist" />
                     </div>
@@ -534,7 +502,7 @@ function App() {
           </div>
           <div className="grid gallery">
             <figure className="gallery-item" aria-label="Brow shaping result">
-              <a href="#hd">
+              <a href="#hd" onClick={handleSectionClick("hd", "#hd", 54)}>
                 <div className="gallery-item__image">
                   <img src="/gallery-after.jpg" alt="HD Brows" />
                 </div>
@@ -542,45 +510,13 @@ function App() {
               </a>
             </figure>
             <figure className="gallery-item" aria-label="Brow tint result">
-              <a href="#lvl">
+              <a href="#lvl" onClick={handleSectionClick("lvl", "#lvl", 54)}>
                 <div className="gallery-item__image">
                   <img src="/gallery-before.jpg" alt="LVL Lashes" />
                 </div>
                 <figcaption>LVL Lashes</figcaption>
               </a>
             </figure>
-          </div>
-        </section>
-
-        <section className="section">
-          <div className="section__headline">
-            <h2>Studio experience</h2>
-            <p>
-              Warm, welcoming appointments with premium products and calm styling. We create brows that feel natural and look effortlessly put together.
-            </p>
-          </div>
-          <div className="highlight-card">
-            <h3>Why choose BrowHouse?</h3>
-            <ul className="highlight-list">
-              <li>Mobile-friendly booking and fast appointment updates.</li>
-              <li>Tailored brow design for every face and hair colour.</li>
-              <li>Focus on gentle, long-lasting results.</li>
-            </ul>
-          </div>
-        </section>
-
-        <section className="section">
-          <div className="section__headline">
-            <h2>What clients say</h2>
-            <p>
-              Reliable results, relaxed appointments, and brows that feel like you but better.
-            </p>
-          </div>
-          <div className="review-card">
-            <p>
-              "Absolutely love my brows. The styling was so calm and the finished shape is perfect. I can book quickly on my phone which is exactly what I need."
-            </p>
-            <p className="review-author">— Chloe, local client</p>
           </div>
         </section>
 

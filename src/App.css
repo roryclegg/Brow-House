@@ -144,8 +144,24 @@ a {
 
 .gallery-item figcaption {
   margin: 0;
-  padding: 0 1rem 1rem;
+  padding: 0.9rem 1rem 1.15rem;
   color: #5e4e47;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  text-transform: capitalize;
+  text-align: center;
+}
+
+.gallery-item a,
+.gallery-item a figcaption,
+.gallery-item a * {
+  text-decoration: none;
+}
+
+.gallery-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 24px 55px rgba(97, 73, 65, 0.12);
 }
 
 .btn:hover {
@@ -165,6 +181,7 @@ a {
 
 .section {
   padding: 2.5rem 1.5rem;
+  scroll-margin-top: 3.5rem;
 }
 
 .section + .section {
