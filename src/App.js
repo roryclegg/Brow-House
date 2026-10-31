@@ -40,6 +40,32 @@ function App() {
     return () => window.removeEventListener("hashchange", handleHashChange);
   }, []);
 
+  const handleGalleryClick = (event) => {
+    event.preventDefault();
+
+    const hero = document.querySelector(".hero");
+    const targetScroll = hero ? hero.offsetHeight + 16 : 0;
+    const start = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+    const distance = targetScroll - start;
+    const duration = 1400;
+    const startTime = performance.now();
+
+    const animateScroll = (now) => {
+      const elapsed = now - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      window.scrollTo(0, start + distance * eased);
+
+      if (progress < 1) {
+        requestAnimationFrame(animateScroll);
+      }
+    };
+
+    setPage("gallery");
+    window.history.replaceState(null, "", "#gallery");
+    requestAnimationFrame(animateScroll);
+  };
+
   const isAbout = page === "about";
   const isLVL = page === "lvl";
   const isHD = page === "hd";
@@ -48,7 +74,7 @@ function App() {
 
   return (
     <div className="app">
-      <main className="page">
+      <main className={`page ${page === "gallery" ? "page--gallery" : ""}`}>
         <section className="hero">
           <div className="hero__content">
             <div className="hero__logo">
@@ -59,6 +85,9 @@ function App() {
               The Brow House is your local boutique brow studio in Cheadle Hulme / Bramhall.  We specialise in HD Brows & LVL Lashes.
             </p>
             <div className="hero__actions">
+              <a className="btn btn-secondary" href="#gallery" onClick={handleGalleryClick}>
+                View gallery
+              </a>
               <a className="btn btn-primary" href="tel:+441234567890">
                 Book a consultation
               </a>
@@ -74,6 +103,37 @@ function App() {
             </div>
           </div>
         </section>
+
+        {isGallery ? (
+          <section id="gallery" className="section gallery-page">
+            <div className="section__headline">
+              <h2>Gallery</h2>
+              <p>Browse the latest brow and lash work from The Brow House.</p>
+            </div>
+            <div className="grid gallery">
+              <figure className="gallery-item" aria-label="Brow gallery image one">
+                <div className="gallery-item__image">
+                  <img src="/gallery-custom-1.jfif" alt="Brow gallery image 1" />
+                </div>
+                <figcaption>Gallery image 1</figcaption>
+              </figure>
+              <figure className="gallery-item" aria-label="Brow gallery image two">
+                <div className="gallery-item__image">
+                  <img src="/gallery-custom-2.jfif" alt="Brow gallery image 2" />
+                </div>
+                <figcaption>Gallery image 2</figcaption>
+              </figure>
+            </div>
+            <div className="about-actions">
+              <a className="btn btn-secondary" href="#about">
+                About us
+              </a>
+              <a className="btn btn-secondary" href="#">
+                Back to home
+              </a>
+            </div>
+          </section>
+        ) : null}
 
         {isAbout ? (
           <section className="section about-page">
