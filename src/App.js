@@ -167,10 +167,10 @@ function App() {
               <a className="btn btn-secondary" href="#services" onClick={handleServicesClick}>
                 Services Price List
               </a>
-              <a className="btn btn-primary" href="tel:+441234567890">
+              <a className="btn btn-primary" href="tel:+447739395899">
                 Book an appointment
               </a>
-              <a className="btn btn-secondary" href="https://wa.me/441234567890?text=Hi%20BrowHouse%2C%20I%27d%20like%20to%20book%20an%20appointment" target="_blank" rel="noreferrer">
+              <a className="btn btn-secondary" href="https://wa.me/447739395899?text=Hi%20BrowHouse%2C%20I%27d%20like%20to%20book%20an%20appointment" target="_blank" rel="noreferrer">
                 Message on WhatsApp
               </a>
               <a className="btn btn-secondary" href="#contact" onClick={handleContactClick}>
