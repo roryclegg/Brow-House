@@ -221,7 +221,7 @@ function App() {
               <p>
                 Vina is very passionate about her eyebrows and eyelashes, and when she moved house from Manchester to Stockport she was continuing to travel to her previous neighbourhood, Didsbury, to have her eyelashes and eyebrows styled as she couldn’t find any salons local to Cheadle Hulme or Bramhall that she was consistently happy with. Consequently she decided that there was a gap in the local market for high quality eyebrow and eyelash care and opened her own business.
               </p>
-              <img className="lvl-image" src="/HD%20Brows%20Offical%20Stylist%20Vina3.jpg" alt="HD Brows Offical Stylist" />
+              <img className="lvl-image" src="/HD%20Brows%20Offical%20Stylist%20Vina2.jpg" alt="HD Brows Offical Stylist" />
               <p>
                 As a busy working mother, Vina often struggled with regular salon opening hours and consequently The Brow House offers very flexible hours. The Brow House is open until 10pm on weekdays and 6pm on Saturday with private off road parking.
               </p>
@@ -255,7 +255,7 @@ function App() {
               <p>
                 Highly regarded by beauty press and enthusiasts worldwide, LVL Enhance adds Length, Volume and Lift (LVL) to natural eyelashes, with no extensions, no adhesive and no mascara.
               </p>
-              <img className="lvl-image" src="/gallery-stylist.jpg" alt="LVL Lashes eyelashes" />
+              <img className="lvl-image" src="/LVL%20Lashes%20LVL%20Enhance.jpg" alt="LVL Lashes eyelashes" />
               <p>
                 Celebrity make-up artist, Lisa Eldridge says “LVL is one of the quickest ways to brighten and lift your entire face.”
               </p>
@@ -288,7 +288,7 @@ function App() {
               <p>
                 Please view our <a href="#contact" onClick={handleContactClick}>Contact / Find Us</a> page for address details and a map.
               </p>
-              <img className="lvl-image" src="/gallery-before.jpg" alt="LVL Lashes before and after" />
+              <img className="lvl-image" src="/LVL%20Lashes%20before%20and%20after.jpg" alt="LVL Lashes before and after" />
               <p>
                 Only qualified LVL Lashes technicians can carry out the LVL Lashes treatment, and The Brow House now offers this exclusive treatment. LVL Lashes for £35 or book HD Brows and LVL Lashes together for the reduced price of £55.
               </p>
@@ -327,7 +327,7 @@ function App() {
               <p>
                 Eyebrows are almost as individual as fingerprints, and our tailored procedure transforms even the most unruly, sparse or over-plucked brows into perfect arches to suit the wearer’s face. The HD Brows experience takes approximately 45 minutes and features tinting, waxing and threading, with stylists using a specially designed process to give you your perfect brows.
               </p>
-              <img className="lvl-image" src="/HD%20Brows%201.jpg" alt="HD Brows after" />
+              <img className="lvl-image" src="/eyebrows%20after%20big2.jpg" alt="HD Brows after" />
               <p>
                 Every HD Brows treatment is exclusive. Even if you have sparse areas, hope isn’t lost! We will work with you on a re-growth programme to achieve the perfect brows for you. Plus, the new HD Brows Make Up range of brow products such as pencils, brushes, powders and more will allow you to hide those areas until they grow in if needed. The effects are so good, that they have even been compared to a mini-facelift, and celebrity fans of HD Brows include The Saturdays, Emeli Sandé, Alesha Dixon and Amanda Holden.
               </p>
@@ -340,7 +340,7 @@ function App() {
               <p>
                 For more infromation please visit the offical HD Brows website - <a href="https://www.hdbrows.com" target="_blank" rel="noreferrer">www.hdbrows.com</a>
               </p>
-              <img className="lvl-image" src="/HD%20Brows%202.jpg" alt="HD Brows" />
+              <img className="lvl-image" src="/HD288-HD-Stylists-Resources%202.jpg" alt="HD Brows" />
               <h3>The HD Brows Experience – The 7 Key Steps</h3>
               <ul>
                 <li>Preparation</li>
@@ -373,7 +373,7 @@ function App() {
               <p>
                 HD Brows stylists also provide a range of branded home care products to allow you to continue the experience at home. HD Brows specialists will also focus on long term results and ultimate brow design, rather than quick hair removal, often following a regrowth programme.
               </p>
-              <img className="lvl-image" src="/logo.jpg" alt="HD Brows logo" />
+              <img className="lvl-image" src="/white%20HD%20Brows.jpg" alt="HD Brows logo" />
               <h3>Factors that are taken into account to create your HD brows</h3>
               <p>
                 The following factors are considered by the HD Brows stylist when designing your eyebrows:
@@ -499,7 +499,7 @@ function App() {
                 <figure className="gallery-item" aria-label="Brow lamination result">
                   <a href="#about" onClick={handleSectionClick("about", "#about", 54)}>
                     <div className="gallery-item__image">
-                      <img src="/HD Brows Offical Stylist Vina3.jpg" alt="Brow stylist" />
+                      <img src="/HD%20Brows%20Offical%20Stylist%20Vina2.jpg" alt="Brow stylist" />
                     </div>
                     <figcaption>About Us</figcaption>
                   </a>
