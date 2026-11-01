@@ -100,6 +100,19 @@ function App() {
   const isGallery = page === "gallery";
   const isContact = page === "contact";
 
+  const galleryImages = [
+    { src: "/gallery-custom-1.jfif", alt: "Brow gallery image 1" },
+    { src: "/gallery-custom-2.jfif", alt: "Brow gallery image 2" },
+    { src: "/HD Brows 1.jpg", alt: "HD Brows image 1" },
+    { src: "/HD Brows 2.jpg", alt: "HD Brows image 2" },
+    { src: "/HD Brows 3.jpg", alt: "HD Brows image 3" },
+    { src: "/HD Brows 4.jpg", alt: "HD Brows image 4" },
+    { src: "/HD Brows 5.jpg", alt: "HD Brows image 5" },
+    { src: "/HD Brows 6.jpg", alt: "HD Brows image 6" },
+    { src: "/HD Brows 7.jpg", alt: "HD Brows image 7" },
+    { src: "/HD Brows 8.jpg", alt: "HD Brows image 8" }
+  ];
+
   useEffect(() => {
     const seo = {
       home: {
@@ -177,16 +190,13 @@ function App() {
               <p>Browse the latest brow and lash work from The Brow House.</p>
             </div>
             <div className="grid gallery">
-              <figure className="gallery-item" aria-label="Brow gallery image one">
-                <div className="gallery-item__image">
-                  <img src="/gallery-custom-1.jfif" alt="Brow gallery image 1" />
-                </div>
-              </figure>
-              <figure className="gallery-item" aria-label="Brow gallery image two">
-                <div className="gallery-item__image">
-                  <img src="/gallery-custom-2.jfif" alt="Brow gallery image 2" />
-                </div>
-              </figure>
+              {galleryImages.map((image, index) => (
+                <figure key={`${image.src}-${index}`} className="gallery-item" aria-label={image.alt}>
+                  <div className="gallery-item__image">
+                    <img src={image.src} alt={image.alt} loading="lazy" decoding="async" />
+                  </div>
+                </figure>
+              ))}
             </div>
             <div className="about-actions">
               <a className="btn btn-secondary" href="#about" onClick={handleAboutClick}>
