@@ -102,6 +102,7 @@ function App() {
 
   const mapAddress = "16 Acre Lane, Cheadle Hulme / Bramhall, Stockport, SK8 7PL";
   const isAppleDevice = /iPhone|iPad|iPod/i.test(window.navigator.userAgent);
+  const isAndroidDevice = /Android/i.test(window.navigator.userAgent);
   const mapHref = isAppleDevice
     ? `https://maps.apple.com/?q=${encodeURIComponent(mapAddress)}`
     : `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(mapAddress)}`;
@@ -448,9 +449,9 @@ function App() {
               <a
                 className="contact-map-card"
                 href={mapHref}
-                target="_blank"
-                rel="noreferrer"
-                aria-label={isAppleDevice ? "Open directions to The Brow House in Apple Maps" : "Open directions to The Brow House in Google Maps"}
+                target={isAndroidDevice ? undefined : "_blank"}
+                rel={isAndroidDevice ? undefined : "noreferrer"}
+                aria-label={isAppleDevice ? "Open directions to The Brow House in Apple Maps" : isAndroidDevice ? "Open directions to The Brow House in Google Maps" : "Open directions to The Brow House in Google Maps"}
               >
                 <div className="map-pin">📍</div>
                 <div className="map-copy">
@@ -526,7 +527,7 @@ function App() {
               <div className="service-price">£33</div>
             </article>
             <article className="service-card">
-              <h3>Brow lamination</h3>
+              <h3>Brow Lamination</h3>
               <p>Feathered texture and gentle hold for a soft, salon-fresh finish.</p>
               <div className="service-price">£45</div>
             </article>
