@@ -333,6 +333,9 @@ a {
 .contact-social-icons {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
   gap: 0.8rem;
   margin-top: 1.5rem;
 }

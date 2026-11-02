@@ -100,6 +100,12 @@ function App() {
   const isGallery = page === "gallery";
   const isContact = page === "contact";
 
+  const mapAddress = "16 Acre Lane, Cheadle Hulme / Bramhall, Stockport, SK8 7PL";
+  const isAppleDevice = /iPhone|iPad|iPod/i.test(window.navigator.userAgent);
+  const mapHref = isAppleDevice
+    ? `https://maps.apple.com/?q=${encodeURIComponent(mapAddress)}`
+    : `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(mapAddress)}`;
+
   const galleryImages = [
     { src: "/gallery-custom-1.jfif", alt: "Brow gallery image 1" },
     { src: "/gallery-custom-2.jfif", alt: "Brow gallery image 2" },
@@ -162,13 +168,13 @@ function App() {
             </p>
             <div className="hero__actions">
               <a className="btn btn-secondary" href="#gallery" onClick={handleGalleryClick}>
-                View gallery
+                View Gallery
               </a>
               <a className="btn btn-secondary" href="#services" onClick={handleServicesClick}>
                 Services Price List
               </a>
               <a className="btn btn-primary" href="tel:+447739395899">
-                Book an appointment
+                Book an Appointment
               </a>
               <a className="btn btn-secondary" href="https://wa.me/447739395899?text=Hi%20BrowHouse%2C%20I%27d%20like%20to%20book%20an%20appointment" target="_blank" rel="noreferrer">
                 Message on WhatsApp
@@ -177,7 +183,7 @@ function App() {
                 Contact / Find Us
               </a>
               <a className="btn btn-secondary" href="#about" onClick={handleAboutClick}>
-                About us
+                About Us
               </a>
             </div>
           </div>
@@ -214,7 +220,7 @@ function App() {
             <div className="section__headline">
               <h2>About Us</h2>
               <p>
-                Vina is a fully trained and qualified <a href="https://www.hdbrows.com" target="_blank" rel="noreferrer">HD Brows stylist</a>, a fully trained and qualified <a href="https://nouveaulashes.com/consumer/treatment-guide/enhance-with-lvl" target="_blank" rel="noreferrer">LVL Lashes technician</a> and is also seperately qualified to provide eyelash tints. Vina decided to turn her passion for eyebrows and eyelashes into a successful career by opening her own contemporary new business, The Brow House, specialising in <a href="https://www.hdbrows.com" target="_blank" rel="noreferrer">HD Brows</a> and <a href="https://nouveaulashes.com/consumer/treatment-guide/enhance-with-lvl" target="_blank" rel="noreferrer">LVL Lashes</a>.
+                Vina is a fully trained and qualified <a href="https://hdbrows.com/what-are-hd-brows/" target="_blank" rel="noreferrer">HD Brows stylist</a>, a fully trained and qualified <a href="https://nouveaulashes.com/consumer/treatment-guide/enhance-with-lvl" target="_blank" rel="noreferrer">LVL Lashes technician</a> and is also seperately qualified to provide eyelash tints. Vina decided to turn her passion for eyebrows and eyelashes into a successful career by opening her own contemporary new business, The Brow House, specialising in <a href="https://hdbrows.com/what-are-hd-brows/" target="_blank" rel="noreferrer">HD Brows</a> and <a href="https://nouveaulashes.com/consumer/treatment-guide/enhance-with-lvl" target="_blank" rel="noreferrer">LVL Lashes</a>.
               </p>
             </div>
             <div className="about-content">
@@ -290,7 +296,7 @@ function App() {
               </p>
               <img className="lvl-image" src="/LVL%20Lashes%20before%20and%20after.jpg" alt="LVL Lashes before and after" />
               <p>
-                Only qualified LVL Lashes technicians can carry out the LVL Lashes treatment, and The Brow House now offers this exclusive treatment. LVL Lashes for £35 or book HD Brows and LVL Lashes together for the reduced price of £55.
+                Only qualified LVL Lashes technicians can carry out the LVL Lashes treatment, and The Brow House now offers this exclusive treatment. LVL Lashes for £46 or book HD Brows and LVL Lashes together for the reduced price of £68.
               </p>
               <p>
                 For more information please visit the official LVL Lashes website at <a href="https://nouveaulashes.com/consumer/treatment-guide/enhance-with-lvl" target="_blank" rel="noreferrer">nouveaulashes.com</a>.
@@ -338,7 +344,7 @@ function App() {
                 HD Brows was chosen as the official ‘Brow’ brand for the X-factor in 2010 and subsequently became a registered trademark in 2011.
               </p>
               <p>
-                For more infromation please visit the offical HD Brows website - <a href="https://www.hdbrows.com" target="_blank" rel="noreferrer">www.hdbrows.com</a>
+                For more infromation please visit the offical HD Brows website - <a href="https://hdbrows.com/what-are-hd-brows/" target="_blank" rel="noreferrer">www.hdbrows.com</a>
               </p>
               <img className="lvl-image" src="/HD288-HD-Stylists-Resources%202.jpg" alt="HD Brows" />
               <h3>The HD Brows Experience – The 7 Key Steps</h3>
@@ -389,7 +395,10 @@ function App() {
               </ul>
               <h3>The Brow House – HD Brows Specialists</h3>
               <p>
-                Only qualified <a href="#about" onClick={handleAboutClick}>HD Brows stylists</a> can carry out the HD Brows treatment, and <a href="#" onClick={handleHomeClick}>The Brow House</a> now offers this exclusive treatment. HD Brows for £30.50 or book HD Brows and LVL Lashes together for the reduced price of £68.
+                Only qualified <a href="#about" onClick={handleAboutClick}>HD Brows stylists</a> can carry out the HD Brows treatment, and <a href="#" onClick={handleHomeClick}>The Brow House</a> now offers this exclusive treatment. 
+                </p>
+                <p>
+                HD Brows for £30.50 or book HD Brows and LVL Lashes together for the reduced price of £68.
               </p>
               <p>
                 Please note that a patch test must be carried out 48 hours prior to treatment, which we can post or deliver to your door if you are local to South Manchester, Stockport or North Cheshire as The Brow House is located on the border of Cheadle Hulme and Bramhall.
@@ -413,9 +422,6 @@ function App() {
           <section className="section contact-page">
             <div className="section__headline">
               <h2>Contact or Find Us</h2>
-              <p>
-                Get in touch with The Brow House for HD Brows, LVL Lashes, appointments and directions.
-              </p>
             </div>
             <div className="about-content">
               <p>
@@ -441,10 +447,10 @@ function App() {
               </p>
               <a
                 className="contact-map-card"
-                href="https://www.google.com/maps/search/?api=1&query=16+Acre+Lane+Cheadle+Hulme+Stockport+SK8+7PL"
+                href={mapHref}
                 target="_blank"
                 rel="noreferrer"
-                aria-label="Open directions to The Brow House in Google Maps"
+                aria-label={isAppleDevice ? "Open directions to The Brow House in Apple Maps" : "Open directions to The Brow House in Google Maps"}
               >
                 <div className="map-pin">📍</div>
                 <div className="map-copy">
@@ -457,9 +463,6 @@ function App() {
                 </div>
               </a>
               <div className="about-actions">
-                <a className="btn btn-secondary" href="mailto:vinaclegg@hotmail.co.uk">
-                  Email us
-                </a>
                 <a className="btn btn-secondary" href="#" onClick={handleHomeClick}>
                   Back to home
                 </a>
@@ -529,8 +532,11 @@ function App() {
             </article>
             <article className="service-card">
               <h3>LVL Lashes</h3>
-              <p>Feathered texture and gentle hold for a soft, salon-fresh finish.</p>
               <div className="service-price">£46</div>
+            </article>
+            <article className="service-card">
+              <h3>Korean Lash Lift</h3>
+              <div className="service-price">£50</div>
             </article>
             <article className="service-card">
               <h3>HD Brows & LVL Lashes Combo</h3>
@@ -538,11 +544,11 @@ function App() {
             </article>
             <article className="service-card">
               <h3>Eyebrow Tint</h3>
-              <div className="service-price">£11</div>
+              <div className="service-price">£12</div>
             </article>
             <article className="service-card">
               <h3>Eyelash Tint</h3>
-              <div className="service-price">£13</div>
+              <div className="service-price">£14</div>
             </article>
             <article className="service-card">
               <h3>Eyelash & Brow Tint Combo</h3>
@@ -609,16 +615,16 @@ function App() {
               <strong>Email</strong>
               <a href="mailto:vinaclegg@hotmail.co.uk">vinaclegg@hotmail.co.uk</a>
             </div>
-            <div className="contact-line">
-              <strong>Facebook</strong>
-              <a href="https://www.facebook.com/hdbrowsatthebrowhouse" target="_blank" rel="noreferrer">www.facebook.com/hdbrowsatthebrowhouse</a>
-            </div>
-            <div className="contact-line">
-              <strong>Instagram</strong>
-              <a href="https://www.instagram.com/thebrowhouseuk" target="_blank" rel="noreferrer">@thebrowhouseuk</a>
-            </div>
           </div>
         </section>
+        <div className="contact-social-icons">
+                <a className="social-link social-link--facebook" href="https://www.facebook.com/hdbrowsatthebrowhouse" target="_blank" rel="noreferrer">
+                  Facebook
+                </a>
+                <a className="social-link social-link--instagram" href="https://www.instagram.com/thebrowhouseuk" target="_blank" rel="noreferrer">
+                  Instagram
+                </a>
+              </div>
 
         <footer className="footer">
           <p>
