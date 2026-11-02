@@ -492,7 +492,7 @@ function App() {
                 <h2>Explore</h2>
               </div>
               <div className="grid gallery">
-                <figure className="gallery-item" aria-label="Full gallery">
+                <figure className="gallery-item gallery-item--gallery" aria-label="Full gallery">
                   <a href="#gallery" onClick={handleGalleryFigcaptionClick}>
                     <div className="gallery-item__image">
                       <img src="/gallery-custom-1.jfif" alt="Gallery preview" />
@@ -500,7 +500,7 @@ function App() {
                     <figcaption>Gallery</figcaption>
                   </a>
                 </figure>
-                <figure className="gallery-item" aria-label="Brow lamination result">
+                <figure className="gallery-item gallery-item--about" aria-label="Brow lamination result">
                   <a href="#about" onClick={handleSectionClick("about", "#about", 54)}>
                     <div className="gallery-item__image">
                       <img src="/HD%20Brows%20Offical%20Stylist%20Vina2.jpg" alt="Brow stylist" />

@@ -19,6 +19,8 @@
 body {
   margin: 0;
   min-height: 100vh;
+  max-width: 100%;
+  overflow-x: hidden;
   background: radial-gradient(circle at top left, rgba(255, 233, 224, 0.6), transparent 34%),
     radial-gradient(circle at bottom right, rgba(245, 220, 212, 0.5), transparent 32%),
     var(--bg);
@@ -26,6 +28,8 @@ body {
 
 #root {
   min-height: 100vh;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 button,
@@ -64,6 +68,7 @@ a {
   height: auto;
   display: block;
   object-fit: contain;
+  max-width: 100%;
 }
 
 .eyebrow {
@@ -499,6 +504,110 @@ a {
 
   .contact-details {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 900px) {
+  .page {
+    padding: 0 1.5rem;
+  }
+
+  .hero__content {
+    max-width: 980px;
+    text-align: center;
+  }
+
+  .hero p {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+  }
+
+  .hero__actions {
+    grid-template-columns: repeat(3, minmax(220px, 1fr));
+    justify-items: center;
+    justify-content: center;
+    max-width: 760px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .hero__actions .btn {
+    width: min(100%, 220px);
+  }
+
+  .section__headline,
+  .about-content,
+  .contact-details {
+    max-width: 980px;
+  }
+
+  .about-content {
+    padding: 0 1rem;
+  }
+
+  .contact-map-card {
+    max-width: 680px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .gallery-item--gallery {
+    max-width: 420px;
+  }
+
+  .gallery-item {
+    margin: 0 auto;
+    align-self: start;
+  }
+
+  .gallery-item--about {
+    max-width: 300px;
+  }
+
+  .gallery-item--about .gallery-item__image {
+    min-height: 0;
+    height: auto;
+  }
+
+  .gallery-item--about .gallery-item__image img {
+    object-fit: contain;
+    height: auto;
+  }
+
+  .grid.gallery {
+    width: min(100%, 760px);
+    margin: 0 auto;
+    justify-items: center;
+    justify-content: center;
+  }
+
+  .section .grid.gallery {
+    grid-template-columns: repeat(2, minmax(260px, 320px));
+  }
+
+  .grid.gallery + .about-actions,
+  .section:last-of-type .grid.gallery {
+    justify-items: center;
+  }
+}
+
+@media (max-width: 899px) {
+  .page,
+  .hero,
+  .section,
+  .gallery-item,
+  .service-card,
+  .contact-map-card,
+  .social-link,
+  .about-actions,
+  .hero__actions {
+    max-width: 100%;
+  }
+
+  .grid.gallery {
+    width: 100%;
+    margin: 0;
   }
 }
 
